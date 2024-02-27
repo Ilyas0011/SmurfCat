@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "554733396206",
+    "project_id": "smurfcat-19a66",
+    "storage_bucket": "smurfcat-19a66.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554733396206:android:3f5d34870afa3b5df353ff",
+        "android_client_info": {
+          "package_name": "com.BaxGame.SmurfCat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrdiNB1X0ec6NU1PWE6g55n9IEG-2UDAA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
