@@ -13,7 +13,7 @@ public class AudioController : MonoBehaviour
     [SerializeField] private AudioSource pickingAudio;
     [SerializeField] private AudioSource forestAudio;
 
-    private void Start()
+    void Start()
     {
         GameObject forestMusicObject = GameObject.FindGameObjectWithTag("Music");
         if (forestMusicObject != null)

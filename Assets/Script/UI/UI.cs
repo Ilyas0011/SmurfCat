@@ -13,7 +13,7 @@ public class UI : MonoBehaviour
     private int lvlId;
     private int nextLvlId;
 
-    private void Start()
+    void Start()
     {
         lvlId = SceneManager.GetActiveScene().buildIndex;
         nextLvlId = lvlId + 1;

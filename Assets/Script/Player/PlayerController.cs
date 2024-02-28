@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Start()
+    void Start()
     {
         rb = GetComponent<Rigidbody>();
 
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
 
         if (movePlayer == true && isLevelComplete == false)
@@ -146,13 +146,6 @@ public class PlayerController : MonoBehaviour
         audioScript.PlayRunAudio();
         animScript.PlayRunAnimation();
     }
-
-    private void RunLoseMushroom()
-    {
-
-
-    }
-
     private void RightRun()
     {
         speedPlayer = 9;
@@ -286,7 +279,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    void OnCollisionEnter(Collision other)
     {
         if (!isLevelComplete)
         {
@@ -313,7 +306,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision other)
+    void OnCollisionExit(Collision other)
     {
         if (!isLevelComplete)
         {
@@ -337,7 +330,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (!isLevelComplete)
         {
@@ -430,7 +423,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Trap2"))
             loseMushroom = false;

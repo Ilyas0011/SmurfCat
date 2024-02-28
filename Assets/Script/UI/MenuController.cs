@@ -14,8 +14,9 @@ public class MenuController : MonoBehaviour
         set { _maxProgressLevel = Math.Max(1, value); }//Нельзя присвоить значение меньше 1
     }
         
-    private void Start()
+    void Start()
     {
+        Application.targetFrameRate = 60;
         MaxProgressLevel = PlayerPrefs.GetInt("LevelProgress");
     }
 

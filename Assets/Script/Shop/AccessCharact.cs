@@ -26,7 +26,7 @@ public class AccessCharact : MonoBehaviour
         snailText.text = PlayerPrefs.GetInt("SnailCurrency").ToString();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         StatusCheck();
     }

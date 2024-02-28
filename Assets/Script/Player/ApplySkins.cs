@@ -8,7 +8,7 @@ public class ApplySkins : MonoBehaviour
     [SerializeField] private Texture[] smurfTexture = new Texture[6];
 
 
-    private void Start()
+    void Start()
     {
         SetSmurfTexture(PlayerPrefs.GetInt("skinKey"));
 

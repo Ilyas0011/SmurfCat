@@ -6,7 +6,7 @@ public class ApplyAccess : MonoBehaviour
 {
     [SerializeField] private GameObject[] _accessories;
 
-    private void Start()
+    void Start()
     {
         InitializeAccessories();
         ActivateAccessory(PlayerPrefs.GetInt("accessorKey"));

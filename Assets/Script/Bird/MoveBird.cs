@@ -8,7 +8,7 @@ public class MoveBird : MonoBehaviour
     [SerializeField] float speed = 1f;
     private Transform myTransform;
 
-    private void Start()
+    void Start()
     {
         myTransform = transform;
     }

@@ -15,7 +15,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private TextMeshProUGUI snailCurrency;
     [SerializeField] private Animator animPlayer;
 
-    private void Start()
+    void Start()
     {
         RefreshRewardedVideo();
         SnailUpadate();
@@ -40,14 +40,14 @@ public class Shop : MonoBehaviour
         animPlayer.Play("Idle");
     }
 
-    private void OnRewardedVideoFinished(object sender, RewardedVideoFinishedEventArgs e)
+    void OnRewardedVideoFinished(object sender, RewardedVideoFinishedEventArgs e)
     {
         PlayerPrefs.SetInt("SnailCurrency", PlayerPrefs.GetInt("SnailCurrency") + 1000);
         SnailUpadate();
         buttonRewarded.SetActive(false);
     }
 
-    private void RefreshRewardedVideo()
+    void RefreshRewardedVideo()
     {
         AppodealCallbacks.RewardedVideo.OnFinished += OnRewardedVideoFinished;
         Appodeal.Cache(AppodealAdType.RewardedVideo);

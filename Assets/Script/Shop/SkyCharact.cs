@@ -25,7 +25,7 @@ public class SkyCharact : MonoBehaviour
         snailCurrency.text = PlayerPrefs.GetInt("SnailCurrency").ToString();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         StatusCheck();
     }

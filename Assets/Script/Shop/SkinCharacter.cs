@@ -26,7 +26,7 @@ public class SkinCharacter : MonoBehaviour
         snailCurrency.text = PlayerPrefs.GetInt("SnailCurrency").ToString();
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
         if (PlayerPrefs.GetInt("skinKey") == idSkin)
             materialToChange.mainTexture = applyTexture;

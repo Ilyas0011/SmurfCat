@@ -23,7 +23,7 @@ public class RewardedAd : MonoBehaviour
         }
     }
 
-    private void Start()
+    void Start()
     {
         AppodealCallbacks.RewardedVideo.OnFinished += OnRewardedVideoFinished;
     }

@@ -11,7 +11,7 @@ public class YourScript : MonoBehaviour
     private float currentDistance;      // Текущее расстояние, которое объект прошел
     private bool movingRight = true;     // Флаг, указывающий на направление движения
 
-    private void Update()
+    void Update()
     {
         // Перемещение объекта по оси X
         float movement = moveSpeed * Time.deltaTime;

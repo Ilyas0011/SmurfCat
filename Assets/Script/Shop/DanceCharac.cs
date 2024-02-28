@@ -25,13 +25,13 @@ public class DanceCharac : MonoBehaviour
         snailCurrency.text = PlayerPrefs.GetInt("SnailCurrency").ToString();
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
         AnimaPlayer();
     }
 
-    private void FixedUpdate()
-    {
+    void FixedUpdate()
+    {   
         StatusCheck();
     }
 

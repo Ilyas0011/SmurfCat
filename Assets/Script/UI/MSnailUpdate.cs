@@ -8,7 +8,7 @@ public class MSnailUpdate : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI snailCurrency;
 
-    private void Start()
+    void Start()
     {
         snailCurrency.text = PlayerPrefs.GetInt("SnailCurrency").ToString();
     }

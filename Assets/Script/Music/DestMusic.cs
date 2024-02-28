@@ -6,7 +6,7 @@ public class DestMusic : MonoBehaviour
 {
     public GameObject[] musicObjs;
 
-    private void Start()
+    void Start()
     {
         musicObjs = GameObject.FindGameObjectsWithTag("Music");
 

@@ -24,7 +24,7 @@ public class LevelContoller : MonoBehaviour
         set { maxProgressLevel = Math.Max(1, value); }//Ќельз€ присвоить значение меньше 1
     }
 
-    private void Start()
+    void Start()
     {
         button = GetComponent<Button>();
         record = PlayerPrefs.GetInt("Record" + lvlId);// акое максимальное умножение мы смогли на этом уровне достигнуть

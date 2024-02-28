@@ -7,7 +7,7 @@ public class AnimationController : MonoBehaviour
     private Animator anim;
     [SerializeField] private string[] danceAnimations = { "Dance", "Dance1", "Dance2", "Dance3", "Dance4", "Dance5" };
 
-    private void Start()
+    void Start()
     {
         anim = GetComponent<Animator>();
     }

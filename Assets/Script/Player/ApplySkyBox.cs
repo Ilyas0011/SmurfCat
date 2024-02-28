@@ -7,7 +7,7 @@ public class ApplySkyBox : MonoBehaviour
 
     [SerializeField] private Material[] skyMaterials;
 
-    private void Start()
+    void Start()
     {
         SetSkyboxMaterial(PlayerPrefs.GetInt("skyKey"));
     }

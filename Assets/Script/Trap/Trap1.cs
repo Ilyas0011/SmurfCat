@@ -6,7 +6,7 @@ public class Trap1 : MonoBehaviour
 {
     private float rotationSpeed = 50.0f;
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         transform.Rotate(0, 0, rotationSpeed);  
     }
