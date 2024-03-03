@@ -27,8 +27,11 @@ public class PlayerController : MonoBehaviour
     private float moveInput;
     private float jumpForce = 32f;
     private float speedPlayer = 15f;
+    private float mushroomTimer = 0f;
+    private float mushroomInterval = 0.06f; //С какой задержкой отнимаются грибы
 
-    private int levelNumberX; //На сколько нужно умножить кристаллы в конце уровня, когда кончились деньги, где 20 это x20, а 0 потерял все деньги от ловушки
+    public int levelNumberX; //На сколько нужно умножить кристаллы в конце уровня, когда кончились деньги, где 20 это x20, а 0 потерял все деньги от ловушки
+    private int _levelMushroom; //Грибы за уровень
     private int nextLvlId;    
     private int lvlId;
 
@@ -39,7 +42,6 @@ public class PlayerController : MonoBehaviour
     private bool leftWallCollision = false;
     private bool rightWallCollision = false;
 
-    private int _levelMushroom; //Грибы за уровень
     public int LevelMushroom
     {
         get { return _levelMushroom; }
@@ -95,8 +97,6 @@ public class PlayerController : MonoBehaviour
             Death();
     }
 
-
-
     IEnumerator Restart()
     {
         yield return new WaitForSeconds(3f);    
@@ -105,43 +105,65 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-
         if (movePlayer == true && isLevelComplete == false)
         {
-            if (isGrounded == true)
-            {
+            HandlePlayerMovement();
 
-                if (joystick.Horizontal > 0.5 && rightWallCollision == false) //Поворачивать начинает только с 0.5, чтобы при малейшем касание он не двигался в сторону
-                {
-                    RightRun();
-                }
-                else if (joystick.Horizontal < -0.5 && leftWallCollision == false)
-                {
-                    LeftRun();
-                }else if(joystick.Vertical > 0.8 )
-                {
-                    Jump();
-                }
-                else
-                {
-                    Run();
-                }
-                 
-            }
-            else if (isGrounded == false)
-            {
-                Fall();
-            }
-
-            rb.velocity = new Vector3(moveInput * 8, rb.velocity.y, speedPlayer);
+            if (loseMushroom == true)
+               LoseMushrooms();
         }
+    }
+
+    void LoseMushrooms()
+    {
+        mushroomTimer += Time.fixedDeltaTime;
+        if (mushroomTimer >= mushroomInterval)
+        {
+            LevelMushroom -= 1;
+            mushroomTimer = 0f;
+
+            if (LevelMushroom <= 0)
+            {
+                LevelMushroom = 0;
+                loseMushroom = false;
+                Final();
+            }
+            MushroomUpdate();
+        }
+    }
+
+    void HandlePlayerMovement()
+    {
+        if (isGrounded == true)
+        {
+            if (joystick.Horizontal > 0.5 && rightWallCollision == false)
+            {
+                RightRun();
+            }
+            else if (joystick.Horizontal < -0.5 && leftWallCollision == false)
+            {
+                LeftRun();
+            }
+            else if (joystick.Vertical > 0.8)
+            {
+                Jump();
+            }
+            else
+            {
+                Run();
+            }
+        }
+        else if (isGrounded == false)
+        {
+            Fall();
+        }
+
+        rb.velocity = new Vector3(moveInput * 8, rb.velocity.y, speedPlayer * (Time.fixedDeltaTime / 0.02f));
     }
 
     private void Run()
     {
-            speedPlayer = 15f;
-      
-
+       speedPlayer = 15f;
         moveInput = 0;
         audioScript.PlayRunAudio();
         animScript.PlayRunAnimation();
@@ -192,9 +214,10 @@ public class PlayerController : MonoBehaviour
 
     private void Wins()
     {
+        isLevelComplete = true;
+        rb.isKinematic = true;
         speedPlayer = 0;
         movePlayer = false;
-        isLevelComplete = true;
 
         animUI.Play("Pop-up window");
         animScript.PlayDance();
@@ -356,12 +379,12 @@ public class PlayerController : MonoBehaviour
                 break;
             case "Trap2":
                 loseMushroom = true;
-                StartCoroutine(LoseMushroom(4));
+                LoseMushroom(4);
                 levelNumberX = 0;
                 break;
             case "Finish":
                 loseMushroom = true;
-                StartCoroutine(LoseMushroom(1));
+                LoseMushroom(1);
                 break;
             case "MultiplyBonus":
                 audioScript.PlayPickingAudio();
@@ -374,7 +397,7 @@ public class PlayerController : MonoBehaviour
                 MushroomUpdate();
                 break;
             case "StartReport":
-                StartCoroutine(LoseMushroom(1));
+                LoseMushroom(1);
                 break;
             case "EndLevel":
                 levelNumberX = other.GetComponent<EndLevel>().endLevelNumberX; //Узнаем на какой плитке умножения стоит на данный момент персонаж
@@ -397,7 +420,7 @@ public class PlayerController : MonoBehaviour
         mushroomText.text = LevelMushroom.ToString();
     }
 
-    IEnumerator LoseMushroom(int numMushroomToSubtract)
+    void LoseMushroom(int numMushroomToSubtract)
     {
         loseMushroom = true;
         Appodeal.Cache(AppodealAdType.RewardedVideo);
@@ -407,19 +430,6 @@ public class PlayerController : MonoBehaviour
         {
             audioScript.StopForestAudio();
             audioScript.PlayMusic();
-        }
-
-        while (loseMushroom)
-        {
-            LevelMushroom -= numMushroomToSubtract;
-            if (LevelMushroom <= 0)
-            {
-                LevelMushroom = 0;
-                loseMushroom = false;
-                Final();
-            }
-            MushroomUpdate();
-            yield return new WaitForSeconds(0.067f);
         }
     }
 
